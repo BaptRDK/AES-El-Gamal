@@ -1,21 +1,24 @@
 
 import sys
 import os
+from math import floor
+
 
 #function to segment the message in n 4*4 matrix (each containing 128 bits)
 def segmess(message):
 
     #test if the file exists and, if not, exits
     if not os.path.isfile(str(message)):
-        raise ValueError("Le fichier " + str(message) + " n\'existe pas")
+        raise ValueError("the file  " + str(message) + " does not exist")
     
     #get the file in binary and map it before closing it
     f = open(str(message), "rb")
-    byteArr = map(ord, f.read())
+    #byteArr = list(map(ord, f.read()))
+    byteArr = list(f.read())
     f.close()
 
     fileSize = len(byteArr)
-    quotient = fileSize / 16
+    quotient = floor(fileSize / 16)
     reste = (fileSize % 16 )
 
     init = 0
@@ -28,7 +31,7 @@ def segmess(message):
         
         #fills the first array with enough 0s to make the final array a 16 factor
         for i in range(bourrage, 16):
-            tabMess[0][i/4][i%4] = byteArr[j]
+            tabMess[0][floor(i/4)][i%4] = byteArr[j]
             j = j + 1
         init=1
     else:
