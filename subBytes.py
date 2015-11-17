@@ -3,48 +3,47 @@
 # First function in AES: SubBytes (substitution)
 # Bi,j = SubBytes(Mi,j) = A x Mi,j^-1 XOR c
 
-import sys
-import os
+# Array manipulation
+from pylab import *
 
-M_SIZE = 8
+# SubByes: calculate (A x message) + c 
+# Param: message = 4x4 array
+# Return: tab_b: message after transformation
+def subBytes(m):
 
-tab_A = [
-[1,0,0,0,1,1,1,1],
-[1,1,0,0,0,1,1,1],
-[1,1,1,0,0,0,1,1],
-[1,1,1,1,0,0,0,1],
-[1,1,1,1,1,0,0,0],
-[0,1,1,1,1,1,0,0],
-[0,0,1,1,1,1,1,0],
-[0,0,0,1,1,1,1,1]]
+	A_SIZE = 8
+	M_SIZE = 4
 
-tab_c = [1,1,0,0,0,1,1,0]
+	# Test the array's size for the m parameter
+	if (len(m[0]) != len(m[1]) and len(m[1]) != len(m[2]) and len(m[2]) != len(m[3]) and len(m[3]) != M_SIZE):
+		raise ValueError("Bad message size in subBytes")
 
-tab_fic = [
-[0,1,0,1,1,1,0,0],
-[0,0,0,1,0,1,1,0],
-[1,1,1,0,0,1,1,1],
-[1,1,1,1,0,0,0,0],
-[0,0,0,0,0,1,1,1],
-[1,1,0,0,1,1,0,0],
-[1,0,1,0,1,1,0,0],
-[1,0,1,1,0,0,0,1]]
+	# Array A
+	tab_A = [
+	[1,0,0,0,1,1,1,1],
+	[1,1,0,0,0,1,1,1],
+	[1,1,1,0,0,0,1,1],
+	[1,1,1,1,0,0,0,1],
+	[1,1,1,1,1,0,0,0],
+	[0,1,1,1,1,1,0,0],
+	[0,0,1,1,1,1,1,0],
+	[0,0,0,1,1,1,1,1]]
 
-tab_b = [8 * [8 * [0]]]
+	# Array m after subBytes transformation
+	tab_b = [[0 for row in range(M_SIZE)] for col in range(M_SIZE)]
 
-# Calculate A x m
-for i in range(0, M_SIZE-1) :
-	for j in range(0, M_SIZE-1) :
-		for k in range(0, M_SIZE-1) :
-			tab_b[i][j] = int(tab_b[i][j]) + (int(tab_A[i][k]) * int(tab_fic[k][j]))
-			k = k+1 
-		j = j+1
-	i = i+1
+	# Vector C
+	tab_c = [1,1,0,0,0,1,1,0]
 
-for i in range(0, M_SIZE-1) :
-	for j in range(0, M_SIZE-1) :
-		tab_b[i][j] = int(tab_b[i][j]) + int(tab_c[i])
-		j = j+1
-	i = i+1
+	# For each message's case
+	for cpt_l in range(M_SIZE):
+		for cpt_c in range(M_SIZE):
 
-exit(0)
+			# Multiplication
+			b = dot(tab_A, m[cpt_l][cpt_c])
+			# XOR
+			b ^= tab_c
+			# Putting
+			tab_b[cpt_l][cpt_c] = b
+
+	return(tab_b)
