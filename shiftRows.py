@@ -1,4 +1,3 @@
-#! /usr/bin/python2.7
 
 
 #takes a 4*4 array and a key size (4,6 or 8) and shift the row according to AES standard
@@ -33,7 +32,7 @@ def decalage(message, permut):
     tmp2 = [0, 0, 0, 0]
     for i in range(permut):
         for j in range(4):
-            tmp2[j] = tmp[(3+j)%4]
+            tmp2[(3+j)%4] = tmp[j]
         tmp = [x for x in tmp2]
 
     return tmp
@@ -70,7 +69,7 @@ def decalageInv(message, permut):
     tmp2 = [0, 0, 0, 0]
     for i in range(permut):
         for j in range(4):
-            tmp2[(3+j)%4] = tmp[j]
+            tmp2[j] = tmp[(3+j)%4]
         tmp = [x for x in tmp2]
     
     return tmp

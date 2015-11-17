@@ -1,4 +1,3 @@
-#! /usr/bin/python2.7
 
 import sys
 import os
@@ -8,8 +7,7 @@ def segmess(message):
 
     #test if the file exists and, if not, exits
     if not os.path.isfile(str(message)):
-        print "Le fichier " + message + " n\'existe pas"
-        sys.exit(2)
+        raise ValueError("Le fichier " + str(message) + " n\'existe pas")
     
     #get the file in binary and map it before closing it
     f = open(str(message), "rb")
