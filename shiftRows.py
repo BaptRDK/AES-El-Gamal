@@ -1,6 +1,6 @@
 
 
-#takes a 4*4 array and a key size (4,6 or 8) and shift the row according to AES standard
+#takes a 4*4 array and a key size (128, 192 or 256) and shift the row according to AES standard
 def shiftRows(message, keySize):
 
     #tests if the message is valid (i.e. a 4*4 array)
@@ -26,7 +26,7 @@ def shiftRows(message, keySize):
 
     return message
 
-#shift n rows (where n=permut) in message (a 1*4 array)
+#shift n rows (where n=permut)to the left in message (a 1*4 array)
 def decalage(message, permut):
     tmp = [x for x in message]
     tmp2 = [0, 0, 0, 0]
@@ -37,7 +37,7 @@ def decalage(message, permut):
 
     return tmp
 
-
+#Takes a message (a 4*4 array) and a key size (128, 192 or 256) and shift the rows back into place
 def invShiftRows(message, keySize):
 
     #tests if the message is valid (i.e. a 4*4 array)
@@ -62,7 +62,7 @@ def invShiftRows(message, keySize):
         message[i] =  decalageInv(message[i], permut[i])
 
     return message
-
+#shift n rows (where n=permut) to the right in message (a 1*4 array)
 def decalageInv(message, permut):
     
     tmp = [x for x in message]
