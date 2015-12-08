@@ -78,3 +78,4 @@ def subBytes(m):
 	print(tab_b)
 
 	return(tab_b)
+
