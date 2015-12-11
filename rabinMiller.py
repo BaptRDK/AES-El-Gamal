@@ -52,9 +52,10 @@ def isWitness(a, n, s, d):
 
 def isPrime(n):
     
-    if n <= 3 or (n % 2) == 0:
+    if n <= 3:
         raise ValueError("isPrime: invalid value of n: " + str(n))
-
+    elif (n % 2) ==0:
+        return(False)
     #decomposing n to have (n-1) = (2**s)*d
     compo = decompo(n)
     
