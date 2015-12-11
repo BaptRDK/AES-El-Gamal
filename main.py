@@ -27,6 +27,6 @@ try:
     #tab2 = addRoundKey.addRoundKey(tab, tab)
     #print(tab2)
 
-    print(elGamal.keygen("toto"))
+    print(elGamal.calgene(sys.argv[1]))
 except ValueError as err:
     print(str(err))
