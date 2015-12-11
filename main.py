@@ -3,6 +3,7 @@ import sys
 import segmess
 import shiftRows
 import addRoundKey
+import elGamal
 
 try:
 #print segmess.segmess(sys.argv[1])
@@ -15,15 +16,17 @@ try:
 #tab3 = shiftRows.invShiftRows(tab, 256)
 #print(tab3)
 
-    tab = [[255]*4]*4
-    key = [[0]*4]*4
+    #tab = [[255]*4]*4
+    #key = [[0]*4]*4
 
-    print(tab)
+    #print(tab)
 
-    print(key)
+    #print(key)
 
 
-    tab2 = addRoundKey.addRoundKey(tab, tab)
-    print(tab2)
+    #tab2 = addRoundKey.addRoundKey(tab, tab)
+    #print(tab2)
+
+    print(elGamal.keygen("toto"))
 except ValueError as err:
     print(str(err))
