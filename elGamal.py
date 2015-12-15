@@ -75,20 +75,20 @@ def keygen():
     file.close()
 
     #write the second part of the public key into another file
-    generator = calgene(clef)
+    generator = calcGene(clef)
     file = open("clefP", 'w')
     file.write(str(generator))
     file.close()
 
     #randomly generate the secret key, it must be <clefQ
-    secret = rangrange(1, clef)
+    secret = randrange(1, clef)
     file = open("clefS", 'w')
     file.write(str(secret))
     file.close()
 
     #calculate the third part of the public key and write it into a fourth file
     file = open("clefH", 'w')
-    file.write(str(generator**secret))
+    file.write(str((generator**secret)%clef))
     file.close()
 
 
