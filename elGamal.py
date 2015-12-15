@@ -49,7 +49,7 @@ def keygen():
     file.close()
 
     #randomly generate the secret key, it must be <clefQ
-    secret = rangrange(1, clef)
+    secret = randrange(1, clef)
     file = open("clefS", 'w')
     file.write(str(secret))
     file.close()
