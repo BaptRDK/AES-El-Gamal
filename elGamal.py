@@ -29,7 +29,7 @@ def calgene(n):
 
 
 #generate and store in a file a 256-bits couple of keys
-def keygen(fic):
+def keygen():
 
     tailleClef = 16
     clef = randrange(0, 2**tailleClef)
@@ -37,5 +37,26 @@ def keygen(fic):
     while not rabinMiller.isPrime(clef):
         clef = randrange(2, 2**tailleClef)
     
+    #write the first part of the public key into a file
     file = open("clefQ", 'w')
     file.write(str(clef))
+    file.close()
+
+    #write the second part of the public key into another file
+    generator = calgene(clef)
+    file = open("clefP", 'w')
+    file.write(str(generator))
+    file.close()
+
+    #randomly generate the secret key, it must be <clefQ
+    secret = rangrange(1, clef)
+    file = open("clefS", 'w')
+    file.write(str(secret))
+    file.close()
+
+    #calculate the third part of the public key and write it into a fourth file
+    file = open("clefH", 'w')
+    file.write(str(generator**secret))
+    file.close()
+
+
