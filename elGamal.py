@@ -1,7 +1,7 @@
 from random import randrange
 import rabinMiller
 
-
+'''
 #calculate a generator for Z/Zn
 def calgene(n):
     clef = int(n)
@@ -25,9 +25,41 @@ def calgene(n):
             j = j+1
         result = [0] * clef
         tmp = -1
+'''
 
+#trying the lagrange theoreme
+def lagrange(n):
+    clef = int(n)
+    sousClef = clef - 1
+    result = []
 
+    #listing all divisor of sousClef
+    for i in range(2, int((sousClef/2)+1)):
+        if ((sousClef / i ) % 1) == 0:
+            result.append(i)
 
+    result.append(sousClef)
+
+    return(result)
+
+def calcGene(n):
+    clef = int(n)
+    diviseur = lagrange(clef)
+    nbDiviseur = len(diviseur)
+    sousClef = clef-1
+
+    for i in range(2, clef):
+        j = 0
+        while j < nbDiviseur:
+            tmp = (i**diviseur[j]) % clef
+            
+            if tmp == 1:
+                if diviseur[j] == sousClef:
+                    return(i)
+                else:
+                    j = nbDiviseur
+
+            j = j+1
 #generate and store in a file a 256-bits couple of keys
 def keygen():
 
