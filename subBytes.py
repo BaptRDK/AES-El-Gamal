@@ -6,6 +6,18 @@
 # Array manipulation
 from pylab import *
 
+# Inverse: return inverse of a module p
+def inverse(a, p):
+	inverse = 0
+	for d in range (1, p):
+		if ((d * a) % p == 1):
+			inverse = d
+			break
+	if (inverse == 0):
+		raise ValueError("SubBytes: %d has no inverse in Z%d" % (a, p))
+
+	return inverse
+
 # SubByes: calculate (A x message^-1.T) XOR c 
 # Param: message = nx4x4 array
 # Return: tab_b: message after transformation
@@ -75,8 +87,8 @@ def invSubBytes(m):
 	M_SIZE = 4
 
 	# Test the array's size for the m parameter
-        if (len(m[0][0]) != len(m[0][1]) and len(m[0][1]) != len(m[0][2]) and len(m[0][2]) != len(m[0][3]) and len(m[0][3]) != M_SIZE):
-                raise ValueError("Bad message size in invSubBytes")
+	if (len(m[0][0]) != len(m[0][1]) and len(m[0][1]) != len(m[0][2]) and len(m[0][2]) != len(m[0][3]) and len(m[0][3]) != M_SIZE):
+		raise ValueError("Bad message size in invSubBytes")
 	
 	# Array A (binary 8x8)
 	tab_A = [
