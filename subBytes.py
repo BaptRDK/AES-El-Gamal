@@ -5,20 +5,44 @@
 
 # Array manipulation
 from pylab import *
+from aes_base import t_alpha
 
 # Inverse: return inverse of a module p
 def inverse(a, p):
-	inverse = 0
 	for d in range (1, p):
 		if ((d * a) % p == 1):
-			inverse = d
-			break
+			return d
+
 	if (inverse == 0):
-		raise ValueError("SubBytes: %d has no inverse in Z%d" % (a, p))
+		raise ValueError("Inverse: %d has no inverse in Z%d" % (a, p))
 
-	return inverse
+	return 0
 
-# SubByes: calculate (A x message^-1.T) XOR c 
+
+
+# Generator array for GF256
+def genGF():
+	t_alpha = [0 for row in range(256)]
+	alpha = 3
+	for i in range(1, 256):
+		t_alpha[i] = (alpha**i) % 256
+	return t_alpha
+
+def inverseGF(n):
+	trouve = 0
+	cpt = 1
+	if (n > 255 or n < 0):
+		raise ValueError("InverseGF: n is not an octect")
+
+	while (trouve > 0 and cpt < 256):
+		if ( t_alpha[cpt] == n ):
+			trouve = 1
+		cpt += 1
+
+	return ((3**(255 - cpt)) % 256)
+
+
+# SubBytes: calculate (A x message^-1.T) XOR c 
 # Param: message = nx4x4 array
 # Return: tab_b: message after transformation
 def subBytes(m):
@@ -58,8 +82,8 @@ def subBytes(m):
 			for cpt in range(M_SIZE):
 				# Multiplication - change to binary: '{0:08b}'.format(nb)
 				# Final (inverse)
-				#b = dot(tab_A, inv(array(list(map(int,bin(m[cpt_l][cpt_c][cpt])[2:].zfill(8))))).T) %2
-				b = dot(tab_A, inv(array(list(map(int,bin(m[cpt_l][cpt_c][cpt])[2:].zfill(8))))).T) %2
+				b = dot(tab_A, array(list(map(int, bin(inverseGF(m[cpt_l][cpt_c][cpt]))[2:].zfill(8)))).T) %2
+				#b = dot(tab_A, array(list(map(int, bin(m[cpt_l][cpt_c][cpt])[2:].zfill(8)))).T) %2
 				
 				# XOR
 				b ^= tab_c
