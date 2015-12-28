@@ -4,6 +4,7 @@
 # Bi,j = SubBytes(Mi,j) = A x Mi,j^-1 XOR c
 
 # Array manipulation
+import aes_base
 from pylab import *
 from aes_base import t_alpha
 
@@ -48,7 +49,7 @@ def subBytes(m):
 				# Multiplication - change to binary: '{0:08b}'.format(nb)
 				# Final (inverse)
 				#b = dot(tab_A, array(list(map(int, bin(m[cpt_l][cpt_c][cpt])[2:].zfill(8)))).T) %2
-				b = dot(tab_A, array(list(map(int, bin(inverseGF(m[cpt_l][cpt_c][cpt]))[2:].zfill(8)))).T) %2
+				b = dot(tab_A, array(list(map(int, bin(int(aes_base.inverseGF(str(m[cpt_l][cpt_c][cpt]))))[2:].zfill(8)))).T) %2
 				
 				# XOR
 				b ^= tab_c
@@ -108,7 +109,7 @@ def invSubBytes(m):
 				
 				# Multiplication - change to binary: '{0:08b}'.format(nb)
 				#b = dot(tab_A, array(list(map(int,bin(m[cpt_l][cpt_c][cpt])[2:].zfill(8)))).T) %2
-				b = dot(tab_A, array(list(map(int,bin(inverseGF(m[cpt_l][cpt_c][cpt]))[2:].zfill(8)))).T) %2
+				b = dot(tab_A, array(list(map(int,bin(int(aes_base.inverseGF(str(m[cpt_l][cpt_c][cpt]))))[2:].zfill(8)))).T) %2
 				
 				# XOR
 				b ^= tab_c

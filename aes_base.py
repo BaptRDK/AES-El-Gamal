@@ -42,6 +42,7 @@ listebinaire=["0000","0001","0010","0011","0100","0101","0110","0111","1000","10
 # Hexa to bin: OK
 def hex2bin(string):
 	res=""
+	string = str(string)
 	for x in range(len(string)):
 		i=listehexa.index(string[x])
 		res=res+listebinaire[i]
@@ -51,6 +52,7 @@ def hex2bin(string):
 def bin2hex(string):
 	liste=[]
 	res=""
+	string = str(string)
 	while len(string)>4:
 		liste=liste+[string[-4:]]
 		string=string[:-4]
@@ -70,16 +72,18 @@ def bin2dec(string):
 	x=len(string)-1
 	n=0
 	res=0
+	string = str(string)
 	while x!=-1:
 		if string[x]=="1":
 			res=res+2**n
 		n=n+1
 		x=x-1
-	return res
+	return str(res)
 
 # Decimal to bin: OK
 def dec2bin(string):
-	return bin(int(string))[2:]
+	string = str(string)
+	return str(bin(int(string))[2:])
 
 # Decimal to hex: OK
 def dec2hex(string):
@@ -102,13 +106,17 @@ def inverse(a, p):
 
 # Get inverse n in t_alpha corps
 def inverseGF(n):
-	if (n > 255 or n < 0):
+	if (int(n) > 255 or int(n) < 0):
 		raise ValueError("InverseGF: n is not an octect")
 
 	result = dec2hex(n)
-	x = list(str(result))[0]
-	y = list(str(result))[1]
+	if (len(list(str(result))) == 1):
+		x = 0
+		y = list(str(result))[0]
+	else:
+		x = list(str(result))[0]
+		y = list(str(result))[1]
 
-	result = hex2dec(t_alpha[hex2dec(x)][hex2dec(y)])
+	result = hex2dec(t_alpha[int(hex2dec(x))][int(hex2dec(y))])
 
 	return result
