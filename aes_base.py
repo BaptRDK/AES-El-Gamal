@@ -19,65 +19,96 @@ gfp14 = [0, 14, 28, 18, 56, 54, 36, 42, 112, 126, 108, 98, 72, 70, 84, 90, 224, 
 
 Rcon = [0, 1, 2, 4, 8, 16, 32, 64, 128, 27, 54, 108, 216, 171, 77, 154, 47, 94, 188, 99, 198, 151, 53, 106, 212, 179, 125, 250, 239, 197, 145, 57, 114, 228, 211, 189, 97, 194, 159, 37, 74, 148, 51, 102, 204, 131, 29, 58, 116, 232, 203, 141, 1, 2, 4, 8, 16, 32, 64, 128, 27, 54, 108, 216, 171, 77, 154, 47, 94, 188, 99, 198, 151, 53, 106, 212, 179, 125, 250, 239, 197, 145, 57, 114, 228, 211, 189, 97, 194, 159, 37, 74, 148, 51, 102, 204, 131, 29, 58, 116, 232, 203, 141, 1, 2, 4, 8, 16, 32, 64, 128, 27, 54, 108, 216, 171, 77, 154, 47, 94, 188, 99, 198, 151, 53, 106, 212, 179, 125, 250, 239, 197, 145, 57, 114, 228, 211, 189, 97, 194, 159, 37, 74, 148, 51, 102, 204, 131, 29, 58, 116, 232, 203, 141, 1, 2, 4, 8, 16, 32, 64, 128, 27, 54, 108, 216, 171, 77, 154, 47, 94, 188, 99, 198, 151, 53, 106, 212, 179, 125, 250, 239, 197, 145, 57, 114, 228, 211, 189, 97, 194, 159, 37, 74, 148, 51, 102, 204, 131, 29, 58, 116, 232, 203, 141, 1, 2, 4, 8, 16, 32, 64, 128, 27, 54, 108, 216, 171, 77, 154, 47, 94, 188, 99, 198, 151, 53, 106, 212, 179, 125, 250, 239, 197, 145, 57, 114, 228, 211, 189, 97, 194, 159, 37, 74, 148, 51, 102, 204, 131, 29, 58, 116, 232, 203, 141]
 
-t_alpha = [3, 5, 6, 9, 11, 14, 17, 18, 19, 20, 23, 24, 25, 26, 28, 30, 31, 33, 34, 35, 39, 40, 42, 44, 48, 49, 60, 62, 63, 65, 69, 70, 71, 72, 73, 75, 76, 78, 79, 82, 84, 86, 87, 88, 89, 90, 91, 95, 100, 101, 104, 105, 109, 110, 112, 113, 118, 119, 121, 122, 123, 126, 129, 132, 134, 135, 136, 138, 142, 143, 144, 147, 149, 150, 152, 153, 155, 157, 160, 164, 165, 166, 167, 169, 170, 172, 173, 178, 180, 183, 184, 185, 186, 190, 191, 192, 193, 196, 200, 201, 206, 207, 208, 214, 215, 218, 220, 221, 222, 226, 227, 229, 230, 231, 233, 234, 235, 238, 240, 241, 244, 245, 246, 248, 251, 253, 254, 255]
+t_alpha = [["00", "01", "8D", "F6", "CB", "52", "7B", "D1", "E8", "4F", "29", "C0", "B0", "E1", "E5", "C7"],
+["74", "B4", "AA", "4B", "99", "2B", "60", "5F", "58", "3F", "FD", "CC", "FF", "40", "EE", "B2"],
+["3A", "6E", "5A", "F1", "55", "4D", "A8", "C9", "C1", "0A", "98", "15", "30", "44", "A2", "C2"],
+["2C", "45", "92", "6C", "F3", "39", "66", "42", "F2", "35", "20", "6F", "77", "BB", "59", "19"],
+["1D", "FE", "37", "67", "2D", "31", "F5", "69", "A7", "64", "AB", "13", "54", "25", "E9", "09"],
+["ED", "5C", "05", "CA", "4C", "24", "87", "BF", "18", "3E", "22", "F0", "51", "EC", "61", "17"],
+["16", "5E", "AF", "D3", "49", "A6", "36", "43", "F4", "47", "91", "DF", "33", "93", "21", "3B"],
+["79", "B7", "97", "85", "10", "B5", "BA", "3C", "B6", "70", "D0", "06", "A1", "FA", "81", "82"],
+["83", "7E", "7F", "80", "96", "73", "BE", "56", "9B", "9E", "95", "D9", "F7", "02", "B9", "A4"],
+["DE", "6A", "32", "6D", "D8", "8A", "84", "72", "2A", "14", "9F", "88", "F9", "DC", "89", "9A"],
+["FB", "7C", "2E", "C3", "8F", "B8", "65", "48", "26", "C8", "12", "4A", "CE", "E7", "D2", "62"],
+["0C", "E0", "1F", "EF", "11", "75", "78", "71", "A5", "8E", "76", "3D", "BD", "BC", "86", "57"],
+["0B", "28", "2F", "A3", "DA", "D4", "E4", "0F", "A9", "27", "53", "04", "1B", "FC", "AC", "E6"],
+["7A", "07", "AE", "63", "C5", "DB", "E2", "EA", "94", "8B", "C4", "D5", "9D", "F8", "90", "6B"],
+["B1", "0D", "D6", "EB", "C6", "0E", "CF", "AD", "08", "4E", "D7", "E3", "5D", "50", "1E", "B3"], 
+["5B", "23", "38", "34", "68", "46", "03", "8C", "DD", "9C", "7D", "A0", "CD", "1A", "41", "1C"]]
 
 listehexa=["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
 listebinaire=["0000","0001","0010","0011","0100","0101","0110","0111","1000","1001","1010","1011","1100","1101","1110","1111"]
 
-# Hexa to bin
-def hex2bin(d,nb=0):
-    d=int(d,16)
-    if d==0:
-        b="0"
-    else:
-        b=""
-        while d!=0:
-            b="01"[d&1]+b
-            d=d>>1
-    return b.zfill(nb)
+# Hexa to bin: OK
+def hex2bin(string):
+	res=""
+	for x in range(len(string)):
+		i=listehexa.index(string[x])
+		res=res+listebinaire[i]
+	return res
 
-# Bin to haxa
+# Bin to hexa: OK 
 def bin2hex(string):
-    liste=[]
-    res=""
-    while len(string)>4:
-        liste=liste+[string[-4:]]
-        string=string[:-4]
-    liste=liste+[string]
-    while len(liste[-1])!=4:
-        liste[-1]="0"+liste[-1]
-    for x in range(len(liste)):
-        i=listebinaire.index(liste[x])
-        liste[x]=listehexa[i]
-    while liste!=[]:
-        res=res+liste[-1]
-        liste=liste[:-1]
-    return res
+	liste=[]
+	res=""
+	while len(string)>4:
+		liste=liste+[string[-4:]]
+		string=string[:-4]
+	liste=liste+[string]
+	while len(liste[-1])!=4:
+		liste[-1]="0"+liste[-1]
+	for x in range(len(liste)):
+		i=listebinaire.index(liste[x])
+		liste[x]=listehexa[i]
+	while liste!=[]:
+		res=res+liste[-1]
+		liste=liste[:-1]
+	return res
+
+# Bin to decimal: OK
+def bin2dec(string):
+	x=len(string)-1
+	n=0
+	res=0
+	while x!=-1:
+		if string[x]=="1":
+			res=res+2**n
+		n=n+1
+		x=x-1
+	return res
+
+# Decimal to bin: OK
+def dec2bin(string):
+	return bin(int(string))[2:]
+
+# Decimal to hex: OK
+def dec2hex(string):
+	return bin2hex(dec2bin(string))
+
+# Hex to decimal: OK
+def hex2dec(string):
+	return bin2dec(hex2bin(string))
 
 # Inverse: return inverse of a module p
 def inverse(a, p):
-        for d in range (1, p):
-                if ((d * a) % p == 1):
-                        return d
+	for d in range (1, p):
+		if ((d * a) % p == 1):
+			return d
 
-        if (inverse == 0):
-                raise ValueError("Inverse: %d has no inverse in Z%d" % (a, p))
+	if (inverse == 0):
+		raise ValueError("Inverse: %d has no inverse in Z%d" % (a, p))
 
-        return 0
+	return 0
 
 # Get inverse n in t_alpha corps
 def inverseGF(n):
-        trouve = 0
-        cpt = 1
-        if (n > 255 or n < 0):
-                raise ValueError("InverseGF: n is not an octect")
+	if (n > 255 or n < 0):
+		raise ValueError("InverseGF: n is not an octect")
 
+	result = dec2hex(n)
+	x = list(str(result))[0]
+	y = list(str(result))[1]
 
+	result = hex2dec(t_alpha[hex2dec(x)][hex2dec(y)])
 
-        while (trouve > 0 and cpt < 256):
-                if ( t_alpha[cpt] == n ):
-                        trouve = 1
-                cpt += 1
-
-        return ((3**(255 - (cpt - 1))) % 256)
-
+	return result
