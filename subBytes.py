@@ -37,11 +37,6 @@ def subBytes(m):
 	# Vector C
 	tab_c = [1,1,0,0,0,1,1,0]
 
-	# DEBUG
-	#print(len(m))
-	print("Message avant modifications:")
-	print(m)
-
 	# For each message's case
 	for cpt_l in range(len(m)):
 		for cpt_c in range(M_SIZE):
@@ -49,6 +44,7 @@ def subBytes(m):
 				# Multiplication - change to binary: '{0:08b}'.format(nb)
 				# Final (inverse)
 				#b = dot(tab_A, array(list(map(int, bin(m[cpt_l][cpt_c][cpt])[2:].zfill(8)))).T) %2
+				#b = dot(tab_A, array(list(map(int, bin(int(aes_base.inverseGF(str(m[cpt_l][cpt_c][cpt]))))[2:].zfill(8)))).T) %2
 				b = dot(tab_A, array(list(map(int, bin(int(aes_base.inverseGF(str(m[cpt_l][cpt_c][cpt]))))[2:].zfill(8)))).T) %2
 				
 				# XOR
@@ -60,10 +56,6 @@ def subBytes(m):
 				result = int(result, 2)
 				# Putting
 				tab_b[cpt_l][cpt_c][cpt] = result
-
-	# DEBUG:
-	print("Messages après modifications:")
-	print(tab_b)
 
 	return(tab_b)
 
@@ -97,36 +89,27 @@ def invSubBytes(m):
 	# Vector C
 	tab_c = [1,0,1,0,0,0,0,0]
 
-	# DEBUG
-	#print(len(m))
-	print("Message avant modifications:")
-	print(m)
-
 	# For each message's case
 	for cpt_l in range(len(m)):
 		for cpt_c in range(M_SIZE):
 			for cpt in range(M_SIZE):
 				
 				# Multiplication - change to binary: '{0:08b}'.format(nb)
-				#b = dot(tab_A, array(list(map(int,bin(m[cpt_l][cpt_c][cpt])[2:].zfill(8)))).T) %2
-				b = dot(tab_A, array(list(map(int,bin(int(aes_base.inverseGF(str(m[cpt_l][cpt_c][cpt]))))[2:].zfill(8)))).T) %2
-				
+				#b = dot(tab_A, array(list(map(int,bin(int(aes_base.inverseGF(str(m[cpt_l][cpt_c][cpt]))))[2:].zfill(8)))).T) %2
+				b = dot(tab_A, array(list(map(int,bin(m[cpt_l][cpt_c][cpt])[2:].zfill(8)))).T) %2
+
 				# XOR
 				b ^= tab_c
 				# Convert back to decimal
 				result = ''
 				for i in range(A_SIZE):
 					result += str(b[i])
-				result = int(result, 2)
 
 				# Inverse
+				result = int(aes_base.inverseGF(aes_base.bin2dec(result)))
 
 				# Putting
 				tab_b[cpt_l][cpt_c][cpt] = result
-
-	# DEBUG:
-	print("Messages après modifications:")
-	print(tab_b)
 
 	return(tab_b)
 
