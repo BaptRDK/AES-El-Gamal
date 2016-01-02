@@ -10,17 +10,15 @@ def mixColumns(state):
 	M_SIZE = 4
 
 	# Test the array's size for the m parameter
-	if (len(state[0][0]) != len(state[0][1]) and len(state[0][1]) != len(state[0][2]) and len(state[0][2]) != len(state[0][3]) and len(state[0][3]) != M_SIZE):
+	if (len(state[0]) != len(state[1]) and len(state[1]) != len(state[2]) and len(state[2]) != len(state[3]) and len(state[3]) != M_SIZE):
 		raise ValueError("Bad message size in mixColumns")
 	
-	for cpt in range(len(state)):
-		n = [word[:] for word in state[cpt]]
-		for i in range(M_SIZE):
-			n[i][0] = (gfp2[state[cpt][i][0]] ^ gfp3[state[cpt][i][1]] ^ state[cpt][i][2] ^ state[cpt][i][3])
-			n[i][1] = (state[cpt][i][0] ^ gfp2[state[cpt][i][1]] ^ gfp3[state[cpt][i][2]] ^ state[cpt][i][3])
-			n[i][2] = (state[cpt][i][0] ^ state[cpt][i][1] ^ gfp2[state[cpt][i][2]] ^ gfp3[state[cpt][i][3]])
-			n[i][3] = (gfp3[state[cpt][i][0]] ^ state[cpt][i][1] ^ state[cpt][i][2] ^ gfp2[state[cpt][i][3]])		
-
+	n = [word[:] for word in state]
+	for i in range(M_SIZE):
+		n[i][0] = (gfp2[state[i][0]] ^ gfp3[state[i][1]] ^ state[i][2] ^ state[i][3])
+		n[i][1] = (state[i][0] ^ gfp2[state[i][1]] ^ gfp3[state[i][2]] ^ state[i][3])
+		n[i][2] = (state[i][0] ^ state[i][1] ^ gfp2[state[i][2]] ^ gfp3[state[i][3]])
+		n[i][3] = (gfp3[state[i][0]] ^ state[i][1] ^ state[i][2] ^ gfp2[state[i][3]])
 	return n
 
 def invMixColumns(state):
@@ -28,15 +26,14 @@ def invMixColumns(state):
 	M_SIZE = 4
 
 	# Test the array's size for the m parameter
-	if (len(state[0][0]) != len(state[0][1]) and len(state[0][1]) != len(state[0][2]) and len(state[0][2]) != len(state[0][3]) and len(state[0][3]) != M_SIZE):
+	if (len(state[0]) != len(state[1]) and len(state[1]) != len(state[2]) and len(state[2]) != len(state[3]) and len(state[3]) != M_SIZE):
 		raise ValueError("Bad message size in invMixColumns")
 	
-	for cpt in range(len(state)):
-		n = [word[:] for word in state[cpt]]
-		for i in range(M_SIZE):
-			n[i][0] = (gfp2[state[cpt][i][0]] ^ gfp3[state[cpt][i][1]] ^ state[cpt][i][2] ^ state[cpt][i][3])
-			n[i][1] = (state[cpt][i][0] ^ gfp2[state[cpt][i][1]] ^ gfp3[state[cpt][i][2]] ^ state[cpt][i][3])
-			n[i][2] = (state[cpt][i][0] ^ state[cpt][i][1] ^ gfp2[state[cpt][i][2]] ^ gfp3[state[cpt][i][3]])
-			n[i][3] = (gfp3[state[cpt][i][0]] ^ state[cpt][i][1] ^ state[cpt][i][2] ^ gfp2[state[cpt][i][3]])	
+	n = [word[:] for word in state]
+	for i in range(M_SIZE):
+		n[i][0] = (gfp14[state[i][0]] ^ gfp11[state[i][1]] ^ gfp13[state[i][2]] ^ gfp9[state[i][3]])
+		n[i][1] = (gfp9[state[i][0]] ^ gfp14[state[i][1]] ^ gfp11[state[i][2]] ^ gfp13[state[i][3]])
+		n[i][2] = (gfp13[state[i][0]] ^ gfp9[state[i][1]] ^ gfp14[state[i][2]] ^ gfp11[state[i][3]])
+		n[i][3] = (gfp11[state[i][0]] ^ gfp13[state[i][1]] ^ gfp9[state[i][2]] ^ gfp14[state[i][3]])
 
 	return n
