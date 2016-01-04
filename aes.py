@@ -7,11 +7,10 @@ import subBytes, mixColumns, aes_base, shiftRows, segmess, addRoundKey
 # !!! Bug !!! ShiftRows renvoie simplement le message passé en paramètre (regarde dans les print de DEBUG)
 # AddRoundKey bug, je comprend pas trop =/
 
-def aes():
-
+def crypt(filename, k_size, pwd):
 	M_SIZE = 4
-	msg = "plain.txt"
-	key_size = 256
+	msg = filename
+	key_size = k_size
 	key = [[184, 18, 29, 158], [123, 45, 253, 202], [254, 124, 64, 32], [86, 54, 48, 68]]
 
 	m = segmess.segmess(msg)
@@ -44,8 +43,10 @@ def aes():
 
 	print("Encrypted message:")
 	print(c4)
+	
+	# ==================== Test: Inversion ===================
+	print("\nDecryption checking...")
 
-	# Inversion:
 	mc1 = m
 	mc2 = m
 	mc3 = m
@@ -67,5 +68,44 @@ def aes():
 	for cpt in range(m_size):
 		mc4[cpt] = subBytes.invSubBytes(mc3[cpt])
 
-	print("Uncrypted message:")
+	print("Decrypted message:")
+	print(mc4)
+	
+
+def decrypt(filename, k_size, pwd):
+
+	M_SIZE = 4
+	msg = filename
+	key_size = k_size
+	key = [[184, 18, 29, 158], [123, 45, 253, 202], [254, 124, 64, 32], [86, 54, 48, 68]]
+
+	m = segmess.segmess(msg)
+	m_size = len(m)
+
+	print("Decrytpion for %s" % (msg))
+	print(m)
+
+	# Inversion:
+	mc1 = m
+	mc2 = m
+	mc3 = m
+	mc4 = m
+
+	# InvAddRoundKey:
+	for cpt in range(m_size):
+		mc1[cpt] = addRoundKey.addRoundKey(m[cpt], key)
+	
+	# InvMixColumns:
+	for cpt in range(m_size):
+		mc2[cpt] = mixColumns.invMixColumns(mc1[cpt])
+
+	# InvShiftRows:
+	for cpt in range(m_size):
+		mc3[cpt] = shiftRows.invShiftRows(mc2[cpt], key_size)
+	
+	# InvSubBytes:
+	for cpt in range(m_size):
+		mc4[cpt] = subBytes.invSubBytes(mc3[cpt])
+
+	print("Decrypted message:")
 	print(mc4)
