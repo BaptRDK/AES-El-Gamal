@@ -65,7 +65,7 @@ try:
 			mode = input()
 			mode = int(mode)
 		
-		print("Please give me your filename (must be in the current directory:")
+		print("Please give me your filename (must be in the current directory):")
 		file = input()
 
 		# while file !exists:
@@ -83,16 +83,38 @@ try:
 
 	# El Gamal encryption
 	elif (algo == 2):
-		# Key generation
-		elGamal.keygen()
-		# Encryption
-		elGamal.chiffreFic(filename)
-		# Decryption
-		elGamal.deChiffreFic(
+		print("Do you want to crypt or uncrypt?")
+		print("1- Crypt")
+		print("2- Decrypt")
+		print("3- Key generation")
+		mode = input()
+		mode = int(mode)
+		while (mode < 1 or mode > 3):
+			print("Do you want to crypt or uncrypt?")
+			print("1- Crypt")
+			print("2- Decrypt")
+			print("3- Key generation")
+			mode = input()
+			mode = int(mode)
+		
+		print("Please give me your filename (must be in the current directory):")
+		file = input()
 
-		print("Sorry, this feature is not implemented yet")
-		sleep(2)
-		os.system("python3.4 main.py")
+		# while file !exists:
+		#	print("Please give me your filename (must be in the current directory:")
+		#	file = input()
+		print("\n")
+	
+		# Encryption
+		if(mode == 1):
+			elGamal.chiffreFic(file)
+		# Decryption
+		if(mode == 2):
+			elGamal.deChiffreFic(file)
+		# Key generation
+		if(mode == 3):
+			elGamal.keygen()
+			os.system("python3.4 main.py")
 
 	# El Gamal signature
 	elif (algo == 3):
