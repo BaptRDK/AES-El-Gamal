@@ -11,7 +11,7 @@ def crypt(filename, k_size, pwd):
 	M_SIZE = 4
 	msg = filename
 	key_size = k_size
-	key = [[184, 18, 29, 158], [123, 45, 253, 202], [254, 124, 64, 32], [86, 54, 48, 68]]
+	key = [[184, 18, 29, 158], [123, 45, 253, 202], [254, 124, 64, 32], [86, 54, 48, 68], [184, 18, 29, 158], [123, 45, 253, 202], [254, 124, 64, 32], [86, 54, 48, 68]]
 
 	m = segmess.segmess(msg)
 	m_size = len(m)
@@ -43,6 +43,9 @@ def crypt(filename, k_size, pwd):
 
 	print("Encrypted message:")
 	print(c4)
+	
+	c_filename = filename + ".chif"
+	segmess.invSegmessChiff(c4, c_filename)
 	
 	# ==================== Test: Inversion ===================
 	print("\nDecryption checking...")
@@ -106,6 +109,9 @@ def decrypt(filename, k_size, pwd):
 	# InvSubBytes:
 	for cpt in range(m_size):
 		mc4[cpt] = subBytes.invSubBytes(mc3[cpt])
+
+	c_filename = filename + ".clr"
+	segmess.invSegmessClr(mc4, c_filename)
 
 	print("Decrypted message:")
 	print(mc4)
