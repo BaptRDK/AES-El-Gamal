@@ -68,9 +68,9 @@ try:
 		print("Please give me your filename (must be in the current directory):")
 		file = input()
 
-		# while file !exists:
-		#	print("Please give me your filename (must be in the current directory:")
-		#	file = input()
+		while (not os.path.exists(str(file))):
+			print("Please give me your filename (must be in the current directory):")
+			file = input()
 
 		print("Please insert your password:")
 		pwd = input()
@@ -100,9 +100,9 @@ try:
 		print("Please give me your filename (must be in the current directory):")
 		file = input()
 
-		# while file !exists:
-		#	print("Please give me your filename (must be in the current directory:")
-		#	file = input()
+		while (not os.path.exists(str(file))):
+			print("Please give me your filename (must be in the current directory):")
+			file = input()
 		print("\n")
 	
 		# Encryption
